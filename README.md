@@ -134,9 +134,3 @@ For more information on Next.js, visit the official documentation:
 - [Next.js Documentation](https://nextjs.org/docs/getting-started)
 
 ---
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
