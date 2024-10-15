@@ -11,7 +11,7 @@ export const sendEmail = async ({
   emailType: "VERIFY" | "RESET";
   userId: string;
 }) => {
-  try {
+    try {
     // Log SMTP settings
     console.log({
       EMAIL_HOST: process.env.EMAIL_HOST,
@@ -38,17 +38,16 @@ export const sendEmail = async ({
 
     await user.save();
 
-    // Create email transporter
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: Number(process.env.EMAIL_PORT),
-      secure: process.env.EMAIL_PORT === '465', // true for 465, false for other ports
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
+        host: 'smtp.gmail.com',
+        port: 465, // SSL port for Gmail
+        secure: true, // Use true for SSL (port 465)
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS, // Use the App Password here
+        },
+      });      
+  
     // Set the email subject and URL based on emailType
     let subject, emailBody;
     if (emailType === "VERIFY") {
@@ -98,12 +97,12 @@ export const sendEmail = async ({
     }
 
      // Send email
-     await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject,
-        html: emailBody,
-      });
+    await transporter.sendMail({
+    from: process.env.EMAIL_USER,  // Sender address (your Gmail address)
+    to: email,                     // Recipient's email
+    subject,                       // Email subject
+    html: emailBody,               // Email content in HTML format
+    });
   
       console.log(`Email sent to ${email} for ${emailType}`);
     } catch (error) {

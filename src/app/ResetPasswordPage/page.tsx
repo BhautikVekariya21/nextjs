@@ -2,9 +2,11 @@
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
-export default function ResetPasswordPage() {
+// ResetPasswordPage Component
+const ResetPasswordPage = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [token, setToken] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
@@ -12,8 +14,8 @@ export default function ResetPasswordPage() {
 
   const router = useRouter();
 
+  // Safely extract the token from the router query, handle undefined cases
   useEffect(() => {
-    // Safely extract the token from the router query, handle undefined cases
     const urlToken = router.query.token;
     if (typeof urlToken === "string") {
       setToken(urlToken);
@@ -69,4 +71,7 @@ export default function ResetPasswordPage() {
       )}
     </div>
   );
-}
+};
+
+// Use dynamic import to disable SSR
+export default dynamic(() => Promise.resolve(ResetPasswordPage), { ssr: false });

@@ -2,15 +2,19 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 
-export default function ForgotPasswordPage() {
+// ForgotPasswordPage Component
+const ForgotPasswordPage = () => {
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
+  // Handle form submission for forgot password
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      // Make a request to the forgot password API
       const response = await axios.post("/api/users/forgotpassword", { email });
       setMessage(response.data.message);
       setError(false);
@@ -34,6 +38,7 @@ export default function ForgotPasswordPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="p-2 border border-gray-300 rounded"
+          required
         />
         <button
           type="submit"
@@ -49,4 +54,7 @@ export default function ForgotPasswordPage() {
       )}
     </div>
   );
-}
+};
+
+// Use dynamic import to disable SSR
+export default dynamic(() => Promise.resolve(ForgotPasswordPage), { ssr: false });

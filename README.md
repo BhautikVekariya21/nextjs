@@ -15,7 +15,6 @@ This project is a Next.js application that implements user authentication featur
 - [Courtesy](#courtesy)
 - [Acknowledgments](#acknowledgments)
 - [Documentation](#documentation)
-- [License](#license)
 
 ---
 
