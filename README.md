@@ -1,6 +1,3 @@
-Here’s the updated `README.md` with a specific section for courtesy to Hitesh CodeLab included:
-
-```markdown
 # Next.js Authentication Project
 
 This project is a Next.js application that implements user authentication features, including user registration, email verification, password reset, and middleware for protected routes. It utilizes MongoDB for data storage and Nodemailer for sending emails.
